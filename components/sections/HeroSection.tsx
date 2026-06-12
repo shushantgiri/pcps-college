@@ -104,6 +104,16 @@ export default function HeroSection({ stats }: Props) {
           [data-float] { animation: none !important; }
           [data-scan]  { animation: none !important; }
         }
+
+        /* Mobile background image: visible only below lg breakpoint */
+        .hero-mobile-bg {
+          display: block;
+        }
+        @media (min-width: 1024px) {
+          .hero-mobile-bg {
+            display: none;
+          }
+        }
       `}</style>
 
       <section
@@ -117,12 +127,69 @@ export default function HeroSection({ stats }: Props) {
           fontFamily: "'Inter', system-ui, sans-serif",
         }}
       >
+        {/* ══════════════════════════════════════════
+            MOBILE BACKGROUND IMAGE (hidden on lg+)
+            Low opacity campus photo layered behind
+            all content — right side weighted so it
+            doesn't fight the headline text.
+        ════════════════════════════════════════════ */}
+        <div
+          className="hero-mobile-bg"
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        >
+          {/* The actual image */}
+          <Image
+            src="/pcps_bg.webp"
+            alt=""
+            fill
+            priority
+            style={{
+              objectFit: "cover",
+              objectPosition: "center top",
+              opacity: 0.12,          /* subtle — content stays readable */
+            }}
+          />
+
+          {/* Gradient mask: darkens bottom half and left edge so
+              text contrast is preserved on small screens          */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: [
+                /* darken left edge where headline lives */
+                "linear-gradient(100deg, rgba(7,9,17,0.88) 0%, rgba(7,9,17,0.55) 55%, rgba(7,9,17,0.15) 100%)",
+                /* darken bottom so stats row stays legible */
+                "linear-gradient(to top,    rgba(7,9,17,0.92) 0%, transparent 45%)",
+                /* darken top for the eyebrow badge */
+                "linear-gradient(to bottom, rgba(7,9,17,0.70) 0%, transparent 30%)",
+              ].join(", "),
+            }}
+          />
+
+          {/* Subtle red vignette — echoes the desktop accent palette */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "radial-gradient(ellipse 80% 60% at 80% 30%, rgba(220,38,38,0.07) 0%, transparent 70%)",
+            }}
+          />
+        </div>
+
         {/* ── Background grid ── */}
         <div
           aria-hidden
           style={{
             position: "absolute",
             inset: 0,
+            zIndex: 1,
             backgroundImage: "radial-gradient(rgba(255,255,255,0.022) 1px, transparent 1px)",
             backgroundSize: "28px 28px",
             pointerEvents: "none",
@@ -138,6 +205,7 @@ export default function HeroSection({ stats }: Props) {
             right: "-5%",
             width: "55vw",
             height: "55vw",
+            zIndex: 1,
             background: "radial-gradient(circle, rgba(220,38,38,0.09) 0%, transparent 65%)",
             pointerEvents: "none",
           }}
@@ -152,6 +220,7 @@ export default function HeroSection({ stats }: Props) {
             left: "-10%",
             width: "50vw",
             height: "50vw",
+            zIndex: 1,
             background: "radial-gradient(circle, rgba(29,78,216,0.1) 0%, transparent 60%)",
             pointerEvents: "none",
           }}
@@ -164,6 +233,7 @@ export default function HeroSection({ stats }: Props) {
             position: "absolute",
             inset: "0 0 auto 0",
             height: "1px",
+            zIndex: 2,
             background: "linear-gradient(90deg, transparent 0%, rgba(220,38,38,0.5) 50%, transparent 100%)",
           }}
         />
@@ -174,6 +244,7 @@ export default function HeroSection({ stats }: Props) {
         <div
           style={{
             position: "relative",
+            zIndex: 2,
             margin: "0 auto",
             width: "100%",
             maxWidth: "1300px",
@@ -397,7 +468,7 @@ export default function HeroSection({ stats }: Props) {
               </div>
             </div>
 
-            {/* ══════ RIGHT COLUMN — image ══════ */}
+            {/* ══════ RIGHT COLUMN — image (desktop only) ══════ */}
             <div
               className="hero-image-col"
               style={{
@@ -586,6 +657,7 @@ export default function HeroSection({ stats }: Props) {
             flexDirection: "column",
             alignItems: "center",
             gap: "5px",
+            zIndex: 2,
             animation: "heroScrollHint 2.6s ease-in-out infinite",
           }}
         >
