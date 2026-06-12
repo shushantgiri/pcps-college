@@ -51,15 +51,15 @@ export interface Article {
 
 // ─── ALUMNI / TESTIMONIAL ─────────────────────────────────────────────────────
 export interface Alumni {
-  id: string;
+  id: string | number;
   name: string;
-  batch: number;           // e.g. 2019
-  course: string;
+  testimonial: string;
   currentRole: string;
   currentCompany: string;
-  country?: string;
-  testimonial: string;
-  avatarUrl?: string;
+  batch?: string | number;   // ← change from string to string | number
+  image?: string | null;     // ← already added
+  course?: string;           // ← add this
+  country?: string;          // ← add this
 }
 
 // ─── COLLABORATOR ─────────────────────────────────────────────────────────────
