@@ -4,6 +4,7 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import type { CollegeStats } from "@/types";
 import { useEffect, useRef } from "react";
+import { Code2, Briefcase, BarChart3, Megaphone } from "lucide-react";
 
 export default function AboutSection({ stats }: { stats: CollegeStats }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -26,17 +27,17 @@ export default function AboutSection({ stats }: { stats: CollegeStats }) {
   }, []);
 
   const statItems = [
-    { num: `${stats.activeAlumni}+`,      label: "Alumni",         sub: "15+ countries"   },
-    { num: `${stats.activeStudents}+`,    label: "Students",       sub: "current intake"  },
-    { num: `${stats.placementRate}%`,     label: "Placement",      sub: "within 6 months" },
-    { num: `${stats.yearsOfExperience}+`, label: "Years",          sub: "since 2009"      },
+    { num: `${stats.activeAlumni}+`, label: "Alumni", sub: "15+ countries" },
+    { num: `${stats.activeStudents}+`, label: "Students", sub: "current intake" },
+    { num: `${stats.placementRate}%`, label: "Placement", sub: "within 6 months" },
+    { num: `${stats.yearsOfExperience}+`, label: "Years", sub: "since 2009" },
   ];
 
   const programmes = [
-    { emoji: "", label: "B.Sc. Software Engineering"      },
-    { emoji: "", label: "B.Sc. Business Management"        },
-    { emoji: "", label: "B.Sc. BM with Business Analytics" },
-    { emoji: "", label: "B.Sc. BM with Digital Marketing"  },
+    { Icon: Code2, label: "B.Sc. Software Engineering" },
+    { Icon: Briefcase, label: "B.Sc. Business Management" },
+    { Icon: BarChart3, label: "B.Sc. BM with Business Analytics" },
+    { Icon: Megaphone, label: "B.Sc. BM with Digital Marketing" },
   ];
 
   return (
@@ -79,7 +80,7 @@ export default function AboutSection({ stats }: { stats: CollegeStats }) {
               className="flex flex-col gap-5"
             >
               {/* Image — fixed height, no overflow */}
-              <div className="relative w-full h-[300px] sm:h-[360px] lg:h-[400px]
+              <div className="relative w-full h-[300px] sm:h-[60px] lg:h-[450px]
                               rounded-2xl overflow-hidden
                               shadow-[0_16px_48px_rgba(26,26,46,0.10)] group">
                 <Image
@@ -88,11 +89,11 @@ export default function AboutSection({ stats }: { stats: CollegeStats }) {
                   fill
                   className="object-cover object-center
                              group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                  sizes="(max-width:1024px) 100vw, 50vw"
+                  sizes="(max-width:1024px) 100vw, 100vw"
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t
-                                from-[#1a1a2e]/70 via-[#1a1a2e]/10 to-transparent" />           
+                                from-[#1a1a2e]/70 via-[#1a1a2e]/10 to-transparent" />
               </div>
 
               {/* Stats row — below image */}
@@ -125,9 +126,9 @@ export default function AboutSection({ stats }: { stats: CollegeStats }) {
                 </h2>
                 <p className="mt-4 text-[14px] sm:text-[14.5px] text-gray-400
                               leading-[1.85] max-w-md">
-                  Four internationally accredited undergraduate programmes delivered
-                  on our Lalitpur campus by industry-active faculty — designed to
-                  launch your career from day one.
+                  PCPS College offers internationally recognised UK undergraduate programmes in Software Engineering, 
+                  Business Management, Business Analytics, and Digital Marketing. We provide globally accredited degrees 
+                  in partnership with the University of Bedfordshire and are the only institution in Nepal to offer an on-campus UK degree partnership.
                 </p>
               </div>
 
@@ -137,7 +138,7 @@ export default function AboutSection({ stats }: { stats: CollegeStats }) {
                               text-gray-400 mb-1">
                   Our Programmes
                 </p>
-                {programmes.map(({ emoji, label }) => (
+                {programmes.map(({ Icon, label }) => (
                   <div
                     key={label}
                     className="flex items-center gap-3 bg-white border border-gray-100
@@ -145,7 +146,7 @@ export default function AboutSection({ stats }: { stats: CollegeStats }) {
                                hover:border-[#e63946]/20 hover:shadow-sm
                                transition-all duration-200 group cursor-default"
                   >
-                    <span className="text-[1rem] leading-none shrink-0">{emoji}</span>
+                    <Icon size={16} className="text-[#e63946] shrink-0" />
                     <span className="text-[13px] font-semibold text-[#1a1a2e]
                                      group-hover:text-[#e63946] transition-colors duration-200">
                       {label}

@@ -22,10 +22,10 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection stats={stats} />
-      <NoticesSection notices={notices} />
       <AboutSection stats={stats} />
       <CoursesSection courses={courses} />
       <EventsSection events={events} />
+      <NoticesSection notices={notices} />
       <ResearchSection articles={articles} />
       <TestimonialsSection alumni={alumni} />
       <CollaboratorsSection collaborators={collaborators} />

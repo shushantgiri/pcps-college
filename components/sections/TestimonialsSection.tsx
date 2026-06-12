@@ -82,13 +82,13 @@ export default function TestimonialsSection({ alumni }: { alumni: Alumni[] }) {
           </div>
           <h2 className="text-[1.7rem] sm:text-[2.1rem] font-extrabold text-[#1a1a2e]
                          leading-tight tracking-tight">
-            What our students say
+           What our graduates say about us
           </h2>
         </div>
 
         {/* ── Main panel ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px]
-                        rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-100">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_380px]
+                        rounded-3xl sm:rounded-3xl overflow-hidden border border-gray-100">
 
           {/* LEFT — dark spotlight */}
           <div className="relative bg-[#1a1a2e] px-6 py-8 sm:px-10 sm:py-8 md:px-14 md:py-10

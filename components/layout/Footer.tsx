@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const QUICK_LINKS = [
   { href: "/about", label: "About Us" },
@@ -15,11 +16,11 @@ const STUDENT_LINKS = [
 ];
 
 const SOCIALS = [
-  { label: "fb",  href: "https://www.facebook.com/patancollege" },
-  { label: "ig",  href: "https://www.instagram.com/pcpscollege/" },
-  { label: "in",  href: "https://www.linkedin.com/school/pcpscollege/" },
-  { label: "yt",  href: "https://www.youtube.com/@pcpscollege" },
-  { label: "tt",  href: "https://www.tiktok.com/@pcps_college" },
+  { label: "fb", href: "https://www.facebook.com/patancollege" },
+  { label: "ig", href: "https://www.instagram.com/pcpscollege/" },
+  { label: "in", href: "https://www.linkedin.com/school/pcpscollege/" },
+  { label: "yt", href: "https://www.youtube.com/@pcpscollege" },
+  { label: "tt", href: "https://www.tiktok.com/@pcps_college" },
 ];
 
 export default function Footer() {
@@ -29,15 +30,20 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <p className="text-white font-black text-xl tracking-tight mb-3">
-              PCPS<span className="text-red-500">.</span>
-            </p>
+            <div className="flex items-center gap-2 mb-3">
+              <Image
+                src="/pcps.svg"
+                alt="PCPS Logo"
+                width={100}
+                height={100}
+                style={{ borderRadius: 6 }}
+              />
+            </div>
             <p className="text-sm leading-relaxed mb-4">
               Patan College For Professional Studies<br />
               Kandevatashan, Lalitpur, Nepal
             </p>
-            <p className="text-sm mb-1">📞 +977 9801102235</p>
-            <p className="text-sm">🏫 University of Bedfordshire Partnership</p>
+            <p className="text-sm mb-1"> +977 9801102235</p>
             <div className="flex gap-3 mt-5">
               {SOCIALS.map(({ label, href }) => (
                 <a
@@ -105,7 +111,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/40">
-          <span>©{new Date().getFullYear()} PCPS College · Disclaimer: * denotes group statistics</span>
+          <span>©{new Date().getFullYear()} PCPS College</span>
           <span>University of Bedfordshire Partnership</span>
         </div>
       </div>
