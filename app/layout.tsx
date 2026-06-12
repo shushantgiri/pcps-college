@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import AppLoader from "@/components/ApplLoader";
 
 export const metadata: Metadata = {
   title: "PCPS College – The Most Career Focused UK Degree in Nepal",
@@ -26,9 +27,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-screen flex flex-col bg-white text-gray-900" style={{ fontFamily: "'Inter', sans-serif" }}>
-        <Navbar />
-        <main className="flex-1 mt-[72px]">{children}</main>
-        <Footer />
+        <AppLoader>
+          <Navbar />
+          <main className="flex-1 mt-[72px]">{children}</main>
+          <Footer />
+        </AppLoader>
       </body>
     </html>
   );
