@@ -13,7 +13,7 @@ export default async function AboutPage() {
       <div className="bg-gradient-to-br from-[#1a1a2e] to-[#0f3460] text-white py-24 px-5 text-center">
         <div className="mx-auto max-w-3xl">
           <p className="text-xs font-bold text-red-400 uppercase tracking-widest mb-3">About PCPS</p>
-          <h1 className="text-5xl font-black mb-5">Nepal's Most Career-Focused UK Degree</h1>
+          <h1 className="text-5xl font-black mb-5">Nepal&apos;s Most Career-Focused UK Degree</h1>
           <p className="text-white/60 text-lg leading-relaxed">
             PCPS College offers internationally recognised UK undergraduate programmes in partnership with the University of Bedfordshire — the only institution in Nepal offering an on-campus UK degree partnership.
           </p>
@@ -41,9 +41,9 @@ export default async function AboutPage() {
       <div className="mx-auto max-w-4xl px-5 py-20">
         <SectionHeader eyebrow="Our Story" title="Built for professionals, by professionals" />
         <div className="prose prose-lg max-w-none text-gray-600 leading-relaxed space-y-4">
-          <p>PCPS College was founded with a singular mission: to transform students with potential into amazing professionals. Located in Kandevatashan, Lalitpur, we are Nepal's only institution offering an on-campus UK degree in partnership with the University of Bedfordshire.</p>
+          <p>PCPS College was founded with a singular mission: to transform students with potential into amazing professionals. Located in Kandevatashan, Lalitpur, we are Nepal&apos;s only institution offering an on-campus UK degree in partnership with the University of Bedfordshire.</p>
           <p>Our programmes are designed and delivered by working IT and business professionals, ensuring every lesson is aligned with what the industry actually demands. From day one, students work on real projects, attend industry visits, and build relationships with employers who regularly recruit from PCPS.</p>
-          <p>We believe education should open doors — globally. That's why our graduates are found at companies across Nepal, Australia, Europe, and beyond.</p>
+          <p>We believe education should open doors — globally. That&apos;s why our graduates are found at companies across Nepal, Australia, Europe, and beyond.</p>
         </div>
       </div>
 

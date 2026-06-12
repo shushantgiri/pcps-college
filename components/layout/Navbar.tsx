@@ -18,14 +18,19 @@ const LINKS = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [prevPath, setPrevPath] = useState<string | null>(null);
   const path = usePathname();
+
+  if (prevPath !== path) {
+    setPrevPath(path);
+    setOpen(false);
+  }
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
-  useEffect(() => { setOpen(false); }, [path]);
 
   return (
     <>
@@ -33,7 +38,6 @@ export default function Navbar() {
         <div className="nav-inner">
           <Link href="/" className="nav-logo" aria-label="PCPS College Home">
             <Image src="/pcps.svg" alt="PCPS Logo" width={98} height={98} style={{ borderRadius: 6 }} priority />
-
           </Link>
 
           <ul className="nav-links" role="menubar">
