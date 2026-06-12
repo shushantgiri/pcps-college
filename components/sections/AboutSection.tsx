@@ -120,7 +120,7 @@ export default function AboutSection({ stats }: { stats: CollegeStats }) {
               <div>
                 <h2 className="text-[1.65rem] sm:text-[1.9rem] lg:text-[2.1rem] font-black
                                text-[#1a1a2e] leading-[1.08] tracking-tight">
-                  Nepal's Only On-Campus
+                  Nepal&apos;s Only On-Campus
                   <br />
                   <span className="text-[#e63946]">UK Degree Partnership.</span>
                 </h2>

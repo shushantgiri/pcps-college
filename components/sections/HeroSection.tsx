@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type { CollegeStats } from "@/types";
 
 interface Props {
@@ -62,47 +63,6 @@ function StatCard({
         {label}
       </div>
     </div>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   Programme chip
-───────────────────────────────────────────── */
-function ProgrammeChip({ label, href, icon }: { label: string; href: string; icon: React.ReactNode }) {
-  return (
-    <a
-      href={href}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "8px",
-        padding: "9px 14px",
-        borderRadius: "10px",
-        border: "1px solid rgba(255,255,255,0.09)",
-        background: "rgba(255,255,255,0.04)",
-        color: "rgba(255,255,255,0.65)",
-        fontSize: "12.5px",
-        fontWeight: 600,
-        textDecoration: "none",
-        transition: "all 0.18s",
-        whiteSpace: "nowrap",
-      }}
-      onMouseEnter={e => {
-        const el = e.currentTarget as HTMLAnchorElement;
-        el.style.background = "rgba(255,255,255,0.08)";
-        el.style.color = "#fff";
-        el.style.borderColor = "rgba(255,255,255,0.18)";
-      }}
-      onMouseLeave={e => {
-        const el = e.currentTarget as HTMLAnchorElement;
-        el.style.background = "rgba(255,255,255,0.04)";
-        el.style.color = "rgba(255,255,255,0.65)";
-        el.style.borderColor = "rgba(255,255,255,0.09)";
-      }}
-    >
-      <span style={{ opacity: 0.7 }}>{icon}</span>
-      {label}
-    </a>
   );
 }
 
@@ -261,7 +221,7 @@ export default function HeroSection({ stats }: Props) {
                   <path d="M30 0 V40 M0 20 H60" stroke="#C8102E" strokeWidth="8"/>
                 </svg>
                 <span style={{ fontSize: "11px", fontWeight: 700, color: "rgba(147,197,253,0.85)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
-                  Nepal's only on-campus UK degree
+                  Nepal&apos;s only on-campus UK degree
                 </span>
               </div>
 
@@ -364,8 +324,8 @@ export default function HeroSection({ stats }: Props) {
                   </svg>
                 </a>
 
-                {/* Secondary */}
-                <a
+                {/* Secondary — use Next.js Link for internal route */}
+                <Link
                   href="/courses"
                   style={{
                     display: "inline-flex",
@@ -397,7 +357,7 @@ export default function HeroSection({ stats }: Props) {
                   <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
                   </svg>
-                </a>
+                </Link>
               </div>
 
               {/* ── Stats row ── */}
@@ -446,8 +406,6 @@ export default function HeroSection({ stats }: Props) {
                 display: "none", /* shown via media query below */
               }}
             >
-             
-         
               {/* Image card */}
               <div
                 data-float

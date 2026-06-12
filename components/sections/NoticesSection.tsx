@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { Bell, ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 import { formatDate } from "@/lib/utils";
 import type { Notice } from "@/types";
