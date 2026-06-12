@@ -15,21 +15,28 @@ export default function AboutSection({ stats }: { stats: CollegeStats }) {
       (entries) =>
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            (e.target as HTMLElement).classList.add("is-visible");
+            (e.target as HTMLElement).classList.add("ab-visible");
             io.unobserve(e.target);
           }
         }),
-      { threshold: 0.12 }
+      { threshold: 0.08 }
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 
   const statItems = [
-    { num: `${stats.activeAlumni}+`,      label: "Alumni"         },
-    { num: `${stats.activeStudents}+`,    label: "Students"       },
-    { num: `${stats.placementRate}%`,     label: "Placement Rate" },
-    { num: `${stats.yearsOfExperience}+`, label: "Years Running"  },
+    { num: `${stats.activeAlumni}+`,      label: "Alumni",         sub: "15+ countries"   },
+    { num: `${stats.activeStudents}+`,    label: "Students",       sub: "current intake"  },
+    { num: `${stats.placementRate}%`,     label: "Placement",      sub: "within 6 months" },
+    { num: `${stats.yearsOfExperience}+`, label: "Years",          sub: "since 2009"      },
+  ];
+
+  const programmes = [
+    { emoji: "", label: "B.Sc. Software Engineering"      },
+    { emoji: "", label: "B.Sc. Business Management"        },
+    { emoji: "", label: "B.Sc. BM with Business Analytics" },
+    { emoji: "", label: "B.Sc. BM with Digital Marketing"  },
   ];
 
   return (
@@ -37,207 +44,135 @@ export default function AboutSection({ stats }: { stats: CollegeStats }) {
       <style>{`
         [data-fade] {
           opacity: 0;
-          transform: translateY(28px);
-          transition: opacity 0.65s ease, transform 0.65s ease;
+          transform: translateY(20px);
+          transition: opacity 0.65s cubic-bezier(.22,1,.36,1),
+                      transform 0.65s cubic-bezier(.22,1,.36,1);
         }
-        [data-fade].is-visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        [data-fade].ab-visible { opacity: 1; transform: translateY(0); }
         @media (prefers-reduced-motion: reduce) {
-          [data-fade] {
-            opacity: 1;
-            transform: none;
-            transition: none;
-          }
+          [data-fade] { opacity:1; transform:none; transition:none; }
         }
       `}</style>
 
-      <section className="bg-[#f8f9fb] py-16 sm:py-20 lg:py-28 overflow-hidden">
-        <div ref={ref} className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-10 xl:px-16">
+      <section className="bg-[#f8f9fb] py-16 sm:py-20 lg:py-24 overflow-hidden">
+        <div ref={ref} className="mx-auto max-w-7xl px-5">
 
-          {/* ── Header ── */}
+          {/* ── Eyebrow ── */}
           <div
             data-fade
             style={{ transitionDelay: "0ms" }}
-            className="flex flex-col items-center text-center gap-3 mb-12 lg:mb-16"
+            className="flex items-center gap-3 mb-10 sm:mb-12"
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-red-500">
+            <span className="w-7 h-[2px] bg-[#e63946] rounded-full block" />
+            <span className="text-[10.5px] font-black uppercase tracking-[0.2em] text-[#e63946]">
               About PCPS College
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] xl:text-5xl font-black text-[#1a1a2e]
-                           leading-[1.08] tracking-tight max-w-2xl">
-              Your British Future,<br className="hidden sm:block" />
-              <span className="text-[#e63946]"> Built Right Here.</span>
-            </h2>
-            <p className="text-[14px] sm:text-[15px] text-gray-400 leading-relaxed max-w-lg">
-              The only college in Nepal offering on-campus UK undergraduate degrees
-              — accredited by the University of Bedfordshire.
-            </p>
           </div>
 
-          {/* ── Main grid ── */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-5 sm:gap-6 items-stretch">
+          {/* ── Main 2-col grid ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-            {/* ── LEFT: stacked image cards ── */}
-            <div className="flex flex-col gap-5 sm:gap-6">
-
-              {/* Big image */}
-              <div
-                data-fade
-                style={{ transitionDelay: "100ms" }}
-                className="relative rounded-2xl sm:rounded-3xl overflow-hidden
-                           aspect-[16/9] sm:aspect-[16/10]
-                           shadow-[0_20px_56px_rgba(0,0,0,0.11)] group"
-              >
+            {/* ════ LEFT ════ */}
+            <div
+              data-fade
+              style={{ transitionDelay: "60ms" }}
+              className="flex flex-col gap-5"
+            >
+              {/* Image — fixed height, no overflow */}
+              <div className="relative w-full h-[300px] sm:h-[360px] lg:h-[400px]
+                              rounded-2xl overflow-hidden
+                              shadow-[0_16px_48px_rgba(26,26,46,0.10)] group">
                 <Image
                   src="/images/college.jpg"
-                  alt="PCPS College campus"
+                  alt="PCPS College campus, Lalitpur Nepal"
                   fill
-                  className="object-cover group-hover:scale-105
-                             transition-transform duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 55vw"
+                  className="object-cover object-center
+                             group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                  sizes="(max-width:1024px) 100vw, 50vw"
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t
-                                from-[#1a1a2e]/70 via-transparent to-transparent" />
-
-                {/* Est. chip */}
-                <div className="absolute top-3 left-3 sm:top-5 sm:left-5
-                                bg-white/10 backdrop-blur-md border border-white/20
-                                rounded-full px-3 sm:px-4 py-1 sm:py-1.5
-                                flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <span className="text-white text-[10px] sm:text-[11px] font-semibold">
-                    Est. 2009 · Lalitpur, Nepal
-                  </span>
-                </div>
-
-                {/* #1 badge */}
-                <div className="absolute top-3 right-3 sm:top-5 sm:right-5
-                                bg-[#e63946] text-white rounded-xl
-                                px-3 sm:px-4 py-1.5 sm:py-2 text-center shadow-lg">
-                  <div className="text-sm sm:text-base font-black leading-none">#1</div>
-                  <div className="text-[8px] sm:text-[9px] font-semibold opacity-80 mt-0.5 whitespace-nowrap">
-                    UK Degree in Nepal
-                  </div>
-                </div>
-
-                {/* Bottom location */}
-                <div className="absolute bottom-3 left-4 sm:bottom-5 sm:left-6">
-                  <p className="text-white font-bold text-xs sm:text-sm">PCPS College</p>
-                  <p className="text-white/50 text-[10px] sm:text-xs mt-0.5">Lalitpur, Nepal</p>
-                </div>
+                                from-[#1a1a2e]/70 via-[#1a1a2e]/10 to-transparent" />           
               </div>
 
-              {/* Stats bar card */}
-              <div
-                data-fade
-                style={{ transitionDelay: "180ms" }}
-                className="bg-[#1a1a2e] rounded-2xl sm:rounded-3xl px-4 sm:px-8 py-5 sm:py-7
-                           grid grid-cols-4 divide-x divide-white/10"
-              >
-                {statItems.map(({ num, label }) => (
-                  <div key={label} className="flex flex-col items-center text-center px-1 sm:px-4">
-                    <span className="text-white text-lg sm:text-xl font-black leading-none">
-                      {num}
-                    </span>
-                    <span className="text-white/40 text-[9px] sm:text-[10.5px] font-medium mt-1.5 sm:mt-2">
-                      {label}
-                    </span>
+              {/* Stats row — below image */}
+              <div className="grid grid-cols-4 bg-[#1a1a2e] rounded-2xl
+                              divide-x divide-white/[0.07] px-2 py-5">
+                {statItems.map(({ num, label, sub }) => (
+                  <div key={label} className="flex flex-col items-center text-center px-1.5">
+                    <span className="text-white text-[1.35rem] sm:text-[1.6rem] font-black
+                                     leading-none tracking-tight">{num}</span>
+                    <span className="text-white/60 text-[10px] font-bold mt-1.5">{label}</span>
+                    <span className="text-white/25 text-[9px] mt-0.5 hidden sm:block">{sub}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* ── RIGHT: content ── */}
-            <div className="flex flex-col gap-5 sm:gap-6">
-
-              {/* Partner card */}
-              <div
-                data-fade
-                style={{ transitionDelay: "140ms" }}
-                className="bg-white border border-gray-100 rounded-2xl sm:rounded-3xl
-                           px-4 sm:px-6 py-4 sm:py-5
-                           flex items-center gap-3 sm:gap-4 shadow-sm"
-              >
-                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#1a1a2e]
-                                flex items-center justify-center shrink-0">
-                  <span className="text-white text-[10px] font-black">UB</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-[12px] sm:text-[13px] font-bold text-gray-800 leading-tight">
-                    University of Bedfordshire
-                  </p>
-                  <p className="text-[10px] sm:text-[11px] text-gray-400 mt-0.5">
-                    Official UK Academic Partner
-                  </p>
-                </div>
-                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50
-                                 border border-emerald-100 px-2.5 sm:px-3 py-1 sm:py-1.5
-                                 rounded-full shrink-0">
-                  Accredited
-                </span>
-              </div>
-
-              {/* About text card */}
-              <div
-                data-fade
-                style={{ transitionDelay: "200ms" }}
-                className="bg-white border border-gray-100 rounded-2xl sm:rounded-3xl
-                           px-4 sm:px-6 py-5 sm:py-6
-                           flex flex-col gap-3 sm:gap-4 shadow-sm flex-1"
-              >
-                <h3 className="text-[1.1rem] sm:text-[1.2rem] font-black text-[#1a1a2e]
-                               leading-snug tracking-tight">
-                  Nepal's Only On-Campus<br />UK Degree Partnership
-                </h3>
-                <p className="text-[13px] sm:text-[14px] text-gray-400 leading-relaxed">
-                  UK undergraduate programmes in Software Engineering, Business
-                  Management, Business Analytics, and Digital Marketing —
-                  taught by experienced faculty on our Lalitpur campus.
+            {/* ════ RIGHT ════ */}
+            <div
+              data-fade
+              style={{ transitionDelay: "120ms" }}
+              className="flex flex-col gap-7"
+            >
+              {/* Heading */}
+              <div>
+                <h2 className="text-[1.65rem] sm:text-[1.9rem] lg:text-[2.1rem] font-black
+                               text-[#1a1a2e] leading-[1.08] tracking-tight">
+                  Nepal's Only On-Campus
+                  <br />
+                  <span className="text-[#e63946]">UK Degree Partnership.</span>
+                </h2>
+                <p className="mt-4 text-[14px] sm:text-[14.5px] text-gray-400
+                              leading-[1.85] max-w-md">
+                  Four internationally accredited undergraduate programmes delivered
+                  on our Lalitpur campus by industry-active faculty — designed to
+                  launch your career from day one.
                 </p>
-
-                {/* Key points */}
-                <div className="flex flex-col gap-2.5 sm:gap-3 mt-1">
-                  {[
-                    "Earn a UK degree without leaving Nepal",
-                    "Small class sizes with hands-on learning",
-                    "Dedicated placement & career support",
-                  ].map((point) => (
-                    <div key={point} className="flex items-center gap-2.5 sm:gap-3">
-                      <div className="w-5 h-5 rounded-full bg-red-50 border border-red-100
-                                      flex items-center justify-center shrink-0">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#e63946]" />
-                      </div>
-                      <span className="text-[12px] sm:text-[13px] text-gray-500">{point}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
 
-              {/* CTA card */}
-              <div
-                data-fade
-                style={{ transitionDelay: "260ms" }}
-                className="bg-white border border-gray-100 rounded-2xl sm:rounded-3xl
-                           px-4 sm:px-6 py-4 sm:py-5
-                           flex items-center justify-between gap-4 shadow-sm"
-              >
-                <div>
-                  <p className="text-[12px] sm:text-[13px] font-bold text-gray-800">
-                    Ready to apply?
-                  </p>
-                  <p className="text-[10px] sm:text-[11px] text-gray-400 mt-0.5">
-                    Admissions open for 2025–26
-                  </p>
-                </div>
+              {/* Programmes list */}
+              <div className="flex flex-col gap-2">
+                <p className="text-[10.5px] font-black uppercase tracking-[0.18em]
+                              text-gray-400 mb-1">
+                  Our Programmes
+                </p>
+                {programmes.map(({ emoji, label }) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-3 bg-white border border-gray-100
+                               rounded-xl px-4 py-3
+                               hover:border-[#e63946]/20 hover:shadow-sm
+                               transition-all duration-200 group cursor-default"
+                  >
+                    <span className="text-[1rem] leading-none shrink-0">{emoji}</span>
+                    <span className="text-[13px] font-semibold text-[#1a1a2e]
+                                     group-hover:text-[#e63946] transition-colors duration-200">
+                      {label}
+                    </span>
+                    <span className="ml-auto text-[#e63946]/40 text-xs
+                                     group-hover:text-[#e63946] transition-colors duration-200">
+                      →
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+
+              {/* CTA */}
+              <div className="flex items-center gap-4">
                 <Button href="/about">Learn More</Button>
+                <a
+                  href="https://apply.patancollege.edu.np"
+                  className="text-[13px] font-bold text-[#e63946]
+                             hover:underline underline-offset-2 transition-all"
+                >
+                  Apply now →
+                </a>
               </div>
-
             </div>
-          </div>
 
+          </div>
         </div>
       </section>
     </>
