@@ -216,9 +216,39 @@ export default function CoursesSection({ courses }: { courses: Course[] }) {
           .courses-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
+        /* ── Mobile: horizontal scrolling slides ── */
         @media (max-width: 600px) {
-          .courses-grid { grid-template-columns: 1fr; }
-          .courses-header { flex-direction: column; align-items: flex-start; }
+          .courses-grid {
+            grid-template-columns: none;
+            grid-auto-flow: column;
+            grid-auto-columns: 82%;
+            gap: 14px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 8px;
+            margin: 0 -24px;
+            padding-left: 24px;
+            padding-right: 24px;
+          }
+
+          .courses-grid::-webkit-scrollbar {
+            display: none;
+          }
+
+          .course-card {
+            scroll-snap-align: start;
+          }
+
+          .course-card:first-child {
+            margin-left: 24px;
+          }
+
+          .courses-header {
+            flex-direction: column;
+            align-items: flex-start;
+          }
         }
 
         /* ── Card ── */

@@ -233,7 +233,6 @@ export const ALUMNI: Alumni[] = [
 // ─── COLLABORATORS ────────────────────────────────────────────────────────────
 export const COLLABORATORS: Collaborator[] = [
   { id: "1", name: "Khalti", websiteUrl: "https://khalti.com", category: "Fintech" },
-  { id: "2", name: "Nabil Securities", websiteUrl: "https://nabilsecurities.com.np", category: "Finance" },
   { id: "3", name: "Code Himalaya", websiteUrl: "https://codehimalaya.com", category: "Technology" },
   { id: "4", name: "Idea Studio Nepal", websiteUrl: "https://ideastudio.org.np", category: "Innovation" },
   { id: "5", name: "Veda", websiteUrl: "https://veda-app.com", category: "Technology" },
