@@ -1,5 +1,6 @@
 import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
+import DocumentStack from "@/components/ui/DocumentStack";
 import { CheckCircle, Phone, Mail, MapPin } from "lucide-react";
 
 export const metadata = { title: "Admissions – PCPS College" };
@@ -51,16 +52,19 @@ export default function AdmissionsPage() {
 
       {/* Requirements */}
       <div className="bg-gray-50 py-20 px-5">
-        <div className="mx-auto max-w-3xl">
-          <SectionHeader eyebrow="Requirements" title="What You Need to Apply" />
-          <ul className="space-y-3">
-            {requirements.map((r) => (
-              <li key={r} className="flex items-start gap-3 text-gray-700">
-                <CheckCircle size={18} className="text-green-500 mt-0.5 shrink-0" />
-                {r}
-              </li>
-            ))}
-          </ul>
+        <div className="mx-auto max-w-5xl grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="max-w-3xl">
+            <SectionHeader eyebrow="Requirements" title="What You Need to Apply" />
+            <ul className="space-y-3">
+              {requirements.map((r) => (
+                <li key={r} className="flex items-start gap-3 text-gray-700">
+                  <CheckCircle size={18} className="text-green-500 mt-0.5 shrink-0" />
+                  {r}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <DocumentStack />
         </div>
       </div>
 
