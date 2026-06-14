@@ -104,16 +104,6 @@ export default function HeroSection({ stats }: Props) {
           [data-float] { animation: none !important; }
           [data-scan]  { animation: none !important; }
         }
-
-        /* Mobile background image: visible only below lg breakpoint */
-        .hero-mobile-bg {
-          display: block;
-        }
-        @media (min-width: 1024px) {
-          .hero-mobile-bg {
-            display: none;
-          }
-        }
       `}</style>
 
       <section
@@ -127,14 +117,14 @@ export default function HeroSection({ stats }: Props) {
           fontFamily: "'Inter', system-ui, sans-serif",
         }}
       >
+
         {/* ══════════════════════════════════════════
-            MOBILE BACKGROUND IMAGE (hidden on lg+)
-            Low opacity campus photo layered behind
-            all content — right side weighted so it
-            doesn't fight the headline text.
+            BACKGROUND IMAGE — visible on ALL screens
+            Higher opacity on mobile, slightly lower
+            on desktop where the right-column image
+            already provides the visual weight.
         ════════════════════════════════════════════ */}
         <div
-          className="hero-mobile-bg"
           aria-hidden
           style={{
             position: "absolute",
@@ -143,42 +133,51 @@ export default function HeroSection({ stats }: Props) {
             pointerEvents: "none",
           }}
         >
-          {/* The actual image */}
+          {/* ── Full-bleed campus photo ── */}
           <Image
             src="/pcps_bg.webp"
             alt=""
             fill
             priority
+            sizes="100vw"
             style={{
               objectFit: "cover",
               objectPosition: "center top",
-              opacity: 0.12,          /* subtle — content stays readable */
+              /* Mobile: clearly visible. Desktop override below via class. */
+              opacity: 0.32,
             }}
+            className="hero-bg-img"
           />
 
-          {/* Gradient mask: darkens bottom half and left edge so
-              text contrast is preserved on small screens          */}
+          {/*
+            ── Layered gradient masks ──
+            Three gradients combined:
+            1. Left-edge darkening  → keeps headline text readable
+            2. Bottom darkening     → keeps stats row readable
+            3. Top darkening        → keeps eyebrow badge readable
+            Tweak the rgba alpha values to taste.
+          */}
           <div
             style={{
               position: "absolute",
               inset: 0,
               background: [
-                /* darken left edge where headline lives */
-                "linear-gradient(100deg, rgba(7,9,17,0.88) 0%, rgba(7,9,17,0.55) 55%, rgba(7,9,17,0.15) 100%)",
-                /* darken bottom so stats row stays legible */
-                "linear-gradient(to top,    rgba(7,9,17,0.92) 0%, transparent 45%)",
-                /* darken top for the eyebrow badge */
-                "linear-gradient(to bottom, rgba(7,9,17,0.70) 0%, transparent 30%)",
+                /* left edge — strong on mobile where text sits over the photo */
+                "linear-gradient(100deg, rgba(7,9,17,0.78) 0%, rgba(7,9,17,0.50) 50%, rgba(7,9,17,0.10) 100%)",
+                /* bottom — dark enough for stats + CTA */
+                "linear-gradient(to top, rgba(7,9,17,0.90) 0%, rgba(7,9,17,0.45) 35%, transparent 65%)",
+                /* top — for the eyebrow badge */
+                "linear-gradient(to bottom, rgba(7,9,17,0.60) 0%, transparent 28%)",
               ].join(", "),
             }}
           />
 
-          {/* Subtle red vignette — echoes the desktop accent palette */}
+          {/* Subtle red vignette echoing the brand accent */}
           <div
             style={{
               position: "absolute",
               inset: 0,
-              background: "radial-gradient(ellipse 80% 60% at 80% 30%, rgba(220,38,38,0.07) 0%, transparent 70%)",
+              background: "radial-gradient(ellipse 80% 60% at 70% 30%, rgba(220,38,38,0.08) 0%, transparent 70%)",
             }}
           />
         </div>
@@ -285,11 +284,11 @@ export default function HeroSection({ stats }: Props) {
                 </span>
                 {/* UK flag */}
                 <svg width="18" height="13" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                  <rect width="60" height="40" fill="#012169" rx="2"/>
-                  <path d="M0 0 L60 40 M60 0 L0 40" stroke="white" strokeWidth="8"/>
-                  <path d="M0 0 L60 40 M60 0 L0 40" stroke="#C8102E" strokeWidth="5"/>
-                  <path d="M30 0 V40 M0 20 H60" stroke="white" strokeWidth="13"/>
-                  <path d="M30 0 V40 M0 20 H60" stroke="#C8102E" strokeWidth="8"/>
+                  <rect width="60" height="40" fill="#012169" rx="2" />
+                  <path d="M0 0 L60 40 M60 0 L0 40" stroke="white" strokeWidth="8" />
+                  <path d="M0 0 L60 40 M60 0 L0 40" stroke="#C8102E" strokeWidth="5" />
+                  <path d="M30 0 V40 M0 20 H60" stroke="white" strokeWidth="13" />
+                  <path d="M30 0 V40 M0 20 H60" stroke="#C8102E" strokeWidth="8" />
                 </svg>
                 <span style={{ fontSize: "11px", fontWeight: 700, color: "rgba(147,197,253,0.85)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
                   Nepal&apos;s only on-campus UK degree
@@ -325,11 +324,11 @@ export default function HeroSection({ stats }: Props) {
                 <span style={{ color: "rgba(255,255,255,0.88)" }}>UK Degree</span>
                 {" "}
                 <span style={{
-                    background: "linear-gradient(105deg, #f87171 0%, #ef4444 40%, #dc2626 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}>in Nepal.</span>
+                  background: "linear-gradient(105deg, #f87171 0%, #ef4444 40%, #dc2626 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}>in Nepal.</span>
               </h1>
 
               {/* ── Body ── */}
@@ -337,7 +336,7 @@ export default function HeroSection({ stats }: Props) {
                 style={{
                   fontSize: "clamp(0.93rem, 1.3vw, 1.05rem)",
                   lineHeight: 1.8,
-                  color: "rgba(255,255,255,0.45)",
+                  color: "rgba(255,255,255,0.50)",
                   maxWidth: "500px",
                   marginBottom: "36px",
                   opacity: 0,
@@ -345,7 +344,7 @@ export default function HeroSection({ stats }: Props) {
                 }}
               >
                 Globally accredited programmes — validated by{" "}
-                <span style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>University of Bedfordshire</span>
+                <span style={{ color: "rgba(255,255,255,0.82)", fontWeight: 600 }}>University of Bedfordshire</span>
                 {" "}— designed around industry, built around you.
               </p>
 
@@ -391,11 +390,11 @@ export default function HeroSection({ stats }: Props) {
                 >
                   Apply for 2026 Intake
                   <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </a>
 
-                {/* Secondary — use Next.js Link for internal route */}
+                {/* Secondary */}
                 <Link
                   href="/courses"
                   style={{
@@ -404,10 +403,10 @@ export default function HeroSection({ stats }: Props) {
                     gap: "8px",
                     padding: "13px 22px",
                     borderRadius: "12px",
-                    border: "1px solid rgba(255,255,255,0.11)",
-                    background: "rgba(255,255,255,0.045)",
+                    border: "1px solid rgba(255,255,255,0.13)",
+                    background: "rgba(255,255,255,0.055)",
                     backdropFilter: "blur(12px)",
-                    color: "rgba(255,255,255,0.65)",
+                    color: "rgba(255,255,255,0.70)",
                     fontSize: "14px",
                     fontWeight: 600,
                     textDecoration: "none",
@@ -415,18 +414,18 @@ export default function HeroSection({ stats }: Props) {
                   }}
                   onMouseEnter={e => {
                     const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.background = "rgba(255,255,255,0.08)";
+                    el.style.background = "rgba(255,255,255,0.09)";
                     el.style.color = "#fff";
                   }}
                   onMouseLeave={e => {
                     const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.background = "rgba(255,255,255,0.045)";
-                    el.style.color = "rgba(255,255,255,0.65)";
+                    el.style.background = "rgba(255,255,255,0.055)";
+                    el.style.color = "rgba(255,255,255,0.70)";
                   }}
                 >
                   Explore Programmes
                   <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
               </div>
@@ -438,22 +437,22 @@ export default function HeroSection({ stats }: Props) {
                   gridTemplateColumns: "repeat(4, 1fr)",
                   gap: "0",
                   paddingTop: "28px",
-                  borderTop: "1px solid rgba(255,255,255,0.07)",
+                  borderTop: "1px solid rgba(255,255,255,0.08)",
                   opacity: 0,
                   animation: visible ? "heroFadeUp 0.6s 380ms cubic-bezier(0.22,1,0.36,1) forwards" : "none",
                 }}
               >
                 {[
-                  { num: stats.activeAlumni,       suffix: "+",  label: "Alumni" },
-                  { num: stats.activeStudents,      suffix: "+",  label: "Students" },
-                  { num: stats.placementRate,       suffix: "%",  label: "Placement" },
-                  { num: stats.yearsOfExperience,   suffix: "+",  label: "Years" },
+                  { num: stats.activeAlumni, suffix: "+", label: "Alumni" },
+                  { num: stats.activeStudents, suffix: "+", label: "Students" },
+                  { num: stats.placementRate, suffix: "%", label: "Placement" },
+                  { num: stats.yearsOfExperience, suffix: "+", label: "Years" },
                 ].map((s, i) => (
                   <div
                     key={s.label}
                     style={{
                       paddingLeft: i > 0 ? "24px" : 0,
-                      borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                      borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.08)" : "none",
                     }}
                   >
                     <StatCard
@@ -474,7 +473,7 @@ export default function HeroSection({ stats }: Props) {
               style={{
                 position: "relative",
                 height: "clamp(360px, 52vw, 600px)",
-                display: "none", /* shown via media query below */
+                display: "none",
               }}
             >
               {/* Image card */}
@@ -539,7 +538,7 @@ export default function HeroSection({ stats }: Props) {
                 >
                   <svg viewBox="0 0 120 600" fill="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
                     <path d="M120 0 L60 300 L120 600 L120 0 Z" fill="rgba(220,38,38,0.15)" />
-                    <path d="M120 0 L68 300 L120 600" stroke="rgba(220,38,38,0.45)" strokeWidth="1.5" fill="none"/>
+                    <path d="M120 0 L68 300 L120 600" stroke="rgba(220,38,38,0.45)" strokeWidth="1.5" fill="none" />
                   </svg>
                 </div>
 
@@ -549,7 +548,7 @@ export default function HeroSection({ stats }: Props) {
                   <img src="/pcps.svg" alt="PCPS" style={{ height: "30px", filter: "brightness(0) invert(1)", opacity: 0.8 }} />
                 </div>
 
-                {/* Placement badge — floating */}
+                {/* Placement badge */}
                 <div
                   style={{
                     position: "absolute",
@@ -601,7 +600,7 @@ export default function HeroSection({ stats }: Props) {
               >
                 <span style={{ width: "32px", height: "32px", borderRadius: "9px", background: "rgba(251,191,36,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="15" height="15" fill="none" stroke="#fbbf24" strokeWidth={2} viewBox="0 0 24 24">
-                    <circle cx="12" cy="8" r="6"/><path d="M8 14l-3 7h14l-3-7"/>
+                    <circle cx="12" cy="8" r="6" /><path d="M8 14l-3 7h14l-3-7" />
                   </svg>
                 </span>
                 <span>
@@ -632,7 +631,7 @@ export default function HeroSection({ stats }: Props) {
               >
                 <span style={{ width: "32px", height: "32px", borderRadius: "9px", background: "rgba(96,165,250,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="15" height="15" fill="none" stroke="#60a5fa" strokeWidth={2} viewBox="0 0 24 24">
-                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.686 2 6 2s6-.9 6-2v-5"/>
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c0 1.1 2.686 2 6 2s6-.9 6-2v-5" />
                   </svg>
                 </span>
                 <span>
@@ -663,13 +662,18 @@ export default function HeroSection({ stats }: Props) {
         >
           <div style={{ width: 1, height: 34, background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.18))" }} />
           <svg width="12" height="12" fill="none" stroke="rgba(255,255,255,0.25)" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
 
-        {/* ── Responsive: show image column on lg+ ── */}
+        {/* ── Responsive styles ── */}
         <style>{`
+          /* On desktop (lg+): dim the full-bleed bg image slightly
+             because the right-column card already shows the photo clearly */
           @media (min-width: 1024px) {
+            .hero-bg-img {
+              opacity: 0.18 !important;
+            }
             .hero-grid {
               grid-template-columns: 1fr 480px !important;
             }
@@ -677,15 +681,31 @@ export default function HeroSection({ stats }: Props) {
               display: block !important;
             }
           }
+
           @media (min-width: 1200px) {
             .hero-grid {
               grid-template-columns: 1fr 520px !important;
             }
           }
+
+          /* Mobile: 2-column stats grid so numbers aren't cramped */
           @media (max-width: 640px) {
-            .hero-grid > div:first-child > div[style*="grid-template-columns: repeat(4"] {
+            .hero-grid > div:first-child > div[style*="repeat(4"] {
               grid-template-columns: repeat(2, 1fr) !important;
               row-gap: 24px !important;
+            }
+            /* Fix left-border on stat items for 2-col layout:
+               items 0 & 1 = top row, items 2 & 3 = bottom row.
+               Remove left border from col-start items (0, 2). */
+            .hero-grid > div:first-child > div[style*="repeat(4"] > div:nth-child(1),
+            .hero-grid > div:first-child > div[style*="repeat(4"] > div:nth-child(3) {
+              border-left: none !important;
+              padding-left: 0 !important;
+            }
+            .hero-grid > div:first-child > div[style*="repeat(4"] > div:nth-child(3),
+            .hero-grid > div:first-child > div[style*="repeat(4"] > div:nth-child(4) {
+              border-top: 1px solid rgba(255,255,255,0.08) !important;
+              padding-top: 20px !important;
             }
           }
         `}</style>
