@@ -8,21 +8,6 @@ import Image from "next/image";
 
 export const metadata = { title: "Programmes – PCPS College" };
 
-const PROGRAMME_IMAGES: Record<string, string> = {
-  "business-management": "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=900&q=80",
-  "business-administration": "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=900&q=80",
-  "computing": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
-  "computer-science": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
-  "information-technology": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
-  "networking": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80",
-  "cybersecurity": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80",
-  "artificial-intelligence": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&q=80",
-  "data-science": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&q=80",
-  "accounting-finance": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80",
-  "finance": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80",
-  "hospitality-management": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80",
-  default: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900&q=80",
-};
 const WHY_STATS = [
   { stat: "94%", label: "Graduate placement rate", sub: "within 6 months of graduation" },
   { stat: "2yr", label: "UK Graduate Route visa", sub: "eligible after graduation" },

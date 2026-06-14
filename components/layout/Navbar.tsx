@@ -125,14 +125,15 @@ export default function Navbar() {
 
       <style>{`
         .pcps-nav {
-          position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-          height: 76px;
-          background: rgba(11,15,26,0.7);
-          backdrop-filter: blur(16px);
-          border-bottom: 1px solid transparent;
-          transition: background .35s ease, border-color .35s ease, box-shadow .35s ease, height .25s ease;
-          display: flex; align-items: center;
-        }
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 76px;
+  background: rgba(11,15,26,0.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(230,57,70,0.15);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.35);
+  transition: background .35s ease, border-color .35s ease, box-shadow .35s ease, height .25s ease;
+  display: flex; align-items: center;
+}
         .nav-scrolled {
           background: rgba(11,15,26,0.97) !important;
           border-bottom-color: rgba(230,57,70,0.15) !important;

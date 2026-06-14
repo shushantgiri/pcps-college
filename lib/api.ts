@@ -23,7 +23,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 
 // Helper for when APIs are live
 async function apiFetch<T>(path: string, fallback: T): Promise<T> {
-  if (!BASE_URL) return fallback; // use mock data if no API URL set
+  if (!BASE_URL) return fallback;
   try {
     const res = await fetch(`${BASE_URL}${path}`, { next: { revalidate: 60 } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -51,8 +51,28 @@ export async function getCourse(slug: string): Promise<Course | null> {
 
 // ─── EVENTS ───────────────────────────────────────────────────────────────────
 export async function getEvents(limit?: number): Promise<Event[]> {
-  const all = await apiFetch<Event[]>("/api/events", EVENTS);
-  return limit ? all.slice(0, limit) : all;
+  try {
+    const { client } = await import('./sanity')
+    const data = await client.fetch(
+      `*[_type == "event"] | order(date desc) {
+        "id": _id,
+        title,
+        category,
+        "startDate": date,
+        "endDate": null,
+        description,
+        location,
+        "imageUrl": image.asset->url
+      }`,
+      {},
+      { next: { revalidate: 60 } }
+    )
+    return limit ? data.slice(0, limit) : data
+  } catch {
+    console.warn('[api] falling back to mock events')
+    const all = await apiFetch<Event[]>('/api/events', EVENTS)
+    return limit ? all.slice(0, limit) : all
+  }
 }
 
 export async function getEvent(id: string): Promise<Event | null> {
@@ -84,6 +104,24 @@ export async function getCollaborators(): Promise<Collaborator[]> {
 
 // ─── NOTICES ──────────────────────────────────────────────────────────────────
 export async function getNotices(limit?: number): Promise<Notice[]> {
-  const all = await apiFetch<Notice[]>("/api/notices", NOTICES);
-  return limit ? all.slice(0, limit) : all;
+  try {
+    const { client } = await import('./sanity')
+    const data = await client.fetch(
+      `*[_type == "notice"] | order(date desc) {
+        "id": _id,
+        title,
+        category,
+        "publishedAt": date,
+        body,
+        "attachmentUrl": attachment.asset->url
+      }`,
+      {},
+      { next: { revalidate: 60 } }
+    )
+    return limit ? data.slice(0, limit) : data
+  } catch {
+    console.warn('[api] falling back to mock notices')
+    const all = await apiFetch<Notice[]>('/api/notices', NOTICES)
+    return limit ? all.slice(0, limit) : all
+  }
 }
